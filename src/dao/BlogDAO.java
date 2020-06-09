@@ -33,7 +33,6 @@ public class BlogDAO implements IBlogDAO {
         } catch (SQLException e) {
             userDAO.printSQLException(e);
         }
-
     }
 
     @Override
