@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: ADMIN
+  Date: 6/9/2020
+  Time: 1:24 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -226,10 +233,10 @@
         <div class="fadeIn first">
             <img src="https://lh3.googleusercontent.com/proxy/g-BiyS4WJ9JmSvZUspFLW46bX_4aSIeS2vQMc8KBX3J6NeXzWi4XbGAYKlafFHnylOOR2TIhekRyyNM" id="icon" alt="User Icon" />
         </div>
-        <form>
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-            <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-            <input type="submit" class="fadeIn fourth" value="Log In">
+        <form method="post" >
+            <input type="text" id="login" class="fadeIn second" name="account" placeholder="login">
+            <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+            <input type="submit" class="fadeIn fourth"  value="Log In">
         </form>
         <div id="formFooter">
             <a class="underlineHover" href="#">Forgot Password?</a>
