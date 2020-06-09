@@ -1,16 +1,35 @@
 package model;
 
+import java.sql.Timestamp;
+
 public class Blog {
     private int id;
-    private int name;
+    private String name;
     private String contentBlog;
-    private String date;
+    private Timestamp date;
+    private int user_id;
 
-    public Blog(int id, int name, String contentBlog, String date) {
+    public Blog(int id, String name, String contentBlog, Timestamp date, int user_id) {
         this.id = id;
         this.name = name;
         this.contentBlog = contentBlog;
         this.date = date;
+        this.user_id = user_id;
+    }
+
+    public Blog(String name, String contentBlog, Timestamp date, int user_id) {
+        this.name = name;
+        this.contentBlog = contentBlog;
+        this.date = date;
+        this.user_id = user_id;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public int getId() {
@@ -21,11 +40,11 @@ public class Blog {
         this.id = id;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -37,11 +56,11 @@ public class Blog {
         this.contentBlog = contentBlog;
     }
 
-    public String getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 }

@@ -8,13 +8,13 @@ import java.util.List;
 
 public class UserDAO implements IUserDAO{
 
-    private static final String INSERT_USERS_SQL = "INSERT INTO users" + " (name, account, password,email,phoneNumber) VALUES " +
+    private static final String INSERT_USERS_SQL = "INSERT INTO user" + " (name, account, password,email,phoneNumber) VALUES " +
             " (?, ?, ?,?,?);";
 
-    private static final String SELECT_USER_BY_ID = "select id,name,account,password,email,phoneNumber from users where id =?";
-    private static final String SELECT_ALL_USERS = "select * from users";
-    private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
-    private static final String UPDATE_USERS_SQL = "update users set name = ?,action =?,password=?,email= ?, phoneNumber =? where id = ?;";
+    private static final String SELECT_USER_BY_ID = "select id,name,account,password,email,phoneNumber from user where id =?;";
+    private static final String SELECT_ALL_USERS = "select * from user;";
+    private static final String DELETE_USERS_SQL = "delete from user where id = ?;";
+    private static final String UPDATE_USERS_SQL = "update user set name = ?,account =?,password=?,email= ?, phoneNumber =? where id = ?;";
     public UserDAO() {
     }
 
@@ -111,7 +111,7 @@ public class UserDAO implements IUserDAO{
         return rowUpdated;
     }
 
-    private void printSQLException(SQLException ex) {
+    public void printSQLException(SQLException ex) {
         for (Throwable e : ex) {
             if (e instanceof SQLException) {
                 e.printStackTrace(System.err);

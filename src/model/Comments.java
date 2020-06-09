@@ -1,14 +1,40 @@
 package model;
 
+import java.sql.Timestamp;
+
 public class Comments {
     private int id;
     private String contentComments;
-    private String date;
+    private Timestamp date;
+    private int blog_id;
 
-    public Comments(int id, String contentComments, String date) {
+    public Comments(int id, String contentComments, Timestamp date, int blog_id) {
         this.id = id;
         this.contentComments = contentComments;
         this.date = date;
+        this.blog_id = blog_id;
+    }
+
+    public Comments(String contentComments, Timestamp date, int blog_id) {
+        this.contentComments = contentComments;
+        this.date = date;
+        this.blog_id = blog_id;
+    }
+
+    public Timestamp getDate() {
+        return date;
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
+    }
+
+    public int getBlog_id() {
+        return blog_id;
+    }
+
+    public void setBlog_id(int blog_id) {
+        this.blog_id = blog_id;
     }
 
     public int getId() {
@@ -27,11 +53,4 @@ public class Comments {
         this.contentComments = contentComments;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
 }
