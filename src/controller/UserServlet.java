@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-@WebServlet(name = "UserServlet", urlPatterns = "/user")
+@WebServlet(name = "UserServlet", urlPatterns = "/myblog")
 public class UserServlet extends HttpServlet {
     private UserDAO userDAO ;
     private BlogDAO blogDAO ;
@@ -56,8 +56,16 @@ public class UserServlet extends HttpServlet {
             case "signUp":
                 showSignUp(request,response);
                 break;
+            default:
+                home(request,response);
+                break;
         }
 
+    }
+
+    private void home(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Home.jsp");
+        dispatcher.forward(request,response);
     }
 
     private void showLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

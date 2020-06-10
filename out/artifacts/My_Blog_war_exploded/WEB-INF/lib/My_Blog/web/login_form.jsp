@@ -5,11 +5,13 @@
   Time: 1:24 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -231,9 +233,9 @@
 <div class="wrapper fadeInDown">
     <div id="formContent">
         <div class="fadeIn first">
-            <img src="https://lh3.googleusercontent.com/proxy/g-BiyS4WJ9JmSvZUspFLW46bX_4aSIeS2vQMc8KBX3J6NeXzWi4XbGAYKlafFHnylOOR2TIhekRyyNM" id="icon" alt="User Icon" />
+            <h3 style="color: #005cbf">LOGIN</h3>
         </div>
-        <form method="post" >
+        <form method="post" action="/myblog?action=login">
             <input type="text" id="login" class="fadeIn second" name="account" placeholder="login">
             <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
             <input type="submit" class="fadeIn fourth"  value="Log In">
