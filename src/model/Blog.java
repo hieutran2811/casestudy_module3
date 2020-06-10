@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Blog {
     private int id;
@@ -8,6 +9,8 @@ public class Blog {
     private String contentBlog;
     private Timestamp date;
     private int user_id;
+    private List<Comments> commentsList;
+
 
     public Blog(int id, String name, String contentBlog, Timestamp date, int user_id) {
         this.id = id;
@@ -22,6 +25,14 @@ public class Blog {
         this.contentBlog = contentBlog;
         this.date = date;
         this.user_id = user_id;
+    }
+
+    public List<Comments> getCommentsList() {
+        return commentsList;
+    }
+
+    public void setCommentsList(List<Comments> commentsList) {
+        this.commentsList = commentsList;
     }
 
     public int getUser_id() {

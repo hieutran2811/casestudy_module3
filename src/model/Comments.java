@@ -4,21 +4,33 @@ import java.sql.Timestamp;
 
 public class Comments {
     private int id;
-    private String contentComments;
+    private String content;
     private Timestamp date;
     private int blog_id;
+    private String user_name;
 
-    public Comments(int id, String contentComments, Timestamp date, int blog_id) {
+    public Comments(int id, String content, Timestamp date, int blog_id, String user_name) {
         this.id = id;
-        this.contentComments = contentComments;
+        this.content = content;
         this.date = date;
         this.blog_id = blog_id;
+        this.user_name = user_name;
     }
 
-    public Comments(String contentComments, Timestamp date, int blog_id) {
-        this.contentComments = contentComments;
-        this.date = date;
-        this.blog_id = blog_id;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Timestamp getDate() {
@@ -37,20 +49,11 @@ public class Comments {
         this.blog_id = blog_id;
     }
 
-    public int getId() {
-        return id;
+    public String getUser_name() {
+        return user_name;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
-
-    public String getContentComments() {
-        return contentComments;
-    }
-
-    public void setContentComments(String contentComments) {
-        this.contentComments = contentComments;
-    }
-
 }

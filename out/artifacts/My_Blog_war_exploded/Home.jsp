@@ -84,7 +84,7 @@
 <%--                    </form>--%>
 <%--                </div>--%>
 <%--            </div>--%>
-            <c:forEach var="comments" items="${listcomments}">
+            <c:forEach var="comments" items="${blog.getComments}">
             <div class="media mb-4">
                 <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                 <div class="media-body">
