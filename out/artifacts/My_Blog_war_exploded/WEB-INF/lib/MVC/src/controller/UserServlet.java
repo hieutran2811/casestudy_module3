@@ -114,6 +114,7 @@ public class UserServlet extends HttpServlet {
         User book = new User(id, name, email, country);
         userDAO.updateUser(book);
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/edit.jsp");
+        request.setAttribute("user",book);
         dispatcher.forward(request, response);
     }
 

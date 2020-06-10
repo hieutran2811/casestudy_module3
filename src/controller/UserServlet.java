@@ -1,5 +1,11 @@
 package controller;
 
+import dao.BlogDAO;
+import dao.CommentsDAO;
+import dao.UserDAO;
+import model.Blog;
+import model.User;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,9 +13,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 @WebServlet(name = "UserServlet", urlPatterns = "/user")
 public class UserServlet extends HttpServlet {
+    private UserDAO userDAO ;
+    private BlogDAO blogDAO ;
+    private CommentsDAO commentsDAO;
+
+    @Override
+    public void init() throws ServletException {
+        userDAO = new UserDAO();
+        blogDAO = new BlogDAO();
+        commentsDAO= new CommentsDAO();
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action==null){
@@ -53,9 +72,21 @@ public class UserServlet extends HttpServlet {
     private void signUp(HttpServletRequest request, HttpServletResponse response) {
     }
 
-    private void login(HttpServletRequest request, HttpServletResponse response) {
+    private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String account = request.getParameter("account");
         String password = request.getParameter("password");
+        User user = userDAO.selectUser(account);
+        if (password.equals(user.getPassword())){
+            List<Blog> blogs = blogDAO.selectAllBlog();
+            request.setAttribute("listBlog",blogs);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/show_blog.jsp");
+            dispatcher.forward(request,response);
+
+        }else {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/login_form.jsp");
+            dispatcher.forward(request,response);
+        }
+
 
     }
 }

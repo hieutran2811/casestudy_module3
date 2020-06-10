@@ -8,13 +8,13 @@ import java.util.List;
 
 public class UserDAO implements IUserDAO{
 
-    private static final String INSERT_USERS_SQL = "INSERT INTO user" + " (name, account, password,email,phoneNumber) VALUES " +
+    private static final String INSERT_USERS_SQL = "INSERT INTO my_blog.user" + " (name, account, password,email,phoneNumber) VALUES " +
             " (?, ?, ?,?,?);";
 
-    private static final String SELECT_USER_BY_ID = "select id,name,account,password,email,phoneNumber from user where id =?;";
-    private static final String SELECT_ALL_USERS = "select * from user;";
-    private static final String DELETE_USERS_SQL = "delete from user where id = ?;";
-    private static final String UPDATE_USERS_SQL = "update user set name = ?,account =?,password=?,email= ?, phoneNumber =? where id = ?;";
+    private static final String SELECT_USER_BY_ACCOUNT = "select id,name,account,password,email,phoneNumber from my_blog.user where account =?;";
+    private static final String SELECT_ALL_USERS = "select * from my_blog.user;";
+    private static final String DELETE_USERS_SQL = "delete from my_blog.user where id = ?;";
+    private static final String UPDATE_USERS_SQL = "update my_blog.user set name = ?,account =?,password=?,email= ?, phoneNumber =? where id = ?;";
     public UserDAO() {
     }
 
@@ -47,15 +47,15 @@ public class UserDAO implements IUserDAO{
         }
     }
 
-    public User selectUser(int id) {
+    public User selectUser(String account) {
         User user = null;
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID)) {
-            preparedStatement.setInt(1, id);
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ACCOUNT)) {
+            preparedStatement.setString(1, account);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("name");
-                String account = rs.getString("account");
+                int id = rs.getInt("id");
                 String password = rs.getString("password");
                 String email = rs.getString("email");
                 String phoneNumber = rs.getString("phoneNumber");
