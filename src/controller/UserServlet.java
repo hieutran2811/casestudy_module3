@@ -2,6 +2,7 @@ package controller;
 
 import dao.BlogDAO;
 import dao.CommentsDAO;
+import dao.MyBlogDAO;
 import dao.UserDAO;
 import model.Blog;
 import model.User;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,6 +22,7 @@ import java.util.List;
 public class UserServlet extends HttpServlet {
     private UserDAO userDAO ;
     private BlogDAO blogDAO ;
+    private MyBlogDAO myBlogDAO;
     private CommentsDAO commentsDAO;
 
     @Override
@@ -27,6 +30,7 @@ public class UserServlet extends HttpServlet {
         userDAO = new UserDAO();
         blogDAO = new BlogDAO();
         commentsDAO= new CommentsDAO();
+        myBlogDAO = new MyBlogDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,11 +40,44 @@ public class UserServlet extends HttpServlet {
         }
         switch (action){
             case "login":
-                login(request,response);
+                try {
+                    login(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 break;
             case "signUp":
-                signUp(request,response);
+                try {
+                    signUp(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 break;
+            
+        }
+    }
+
+    private void signUp(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        String account = request.getParameter("account");
+        String firstPassword = request.getParameter("first password");
+        String secondPassword = request.getParameter("second password");
+        if (firstPassword.equals(secondPassword) ){
+            User user = new User(account,firstPassword);
+            boolean check = myBlogDAO.checkUser(user);
+            if (check){
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/sing_up_form.jsp");
+                dispatcher.forward(request,response);
+            }else{
+                myBlogDAO.insertUser(user);
+                List<Blog> blogList = myBlogDAO.selectAllBlog();
+                request.setAttribute("blogList",blogList);
+                request.setAttribute("account",user);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/personal_page.jsp");
+                dispatcher.forward(request,response);
+            }
+        }else {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/sing_up_form.jsp");
+            dispatcher.forward(request,response);
         }
     }
 
@@ -51,50 +88,40 @@ public class UserServlet extends HttpServlet {
         }
         switch (action){
             case "login":
-                showLogin(request,response);
                 break;
             case "signUp":
-                showSignUp(request,response);
                 break;
             default:
-                home(request,response);
+                try {
+                    home(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 break;
         }
 
     }
 
-    private void home(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void home(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        List<Blog> blogList = myBlogDAO.selectAllBlog();
+        request.setAttribute("blogList",blogList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/Home.jsp");
         dispatcher.forward(request,response);
     }
-
-    private void showLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/login_form.jsp");
-        dispatcher.forward(request,response);
-    }
-
-    private void showSignUp(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/sign_up_form.jsp");
-        dispatcher.forward(request,response);
-    }
-    private void signUp(HttpServletRequest request, HttpServletResponse response) {
-    }
-
-    private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         String account = request.getParameter("account");
         String password = request.getParameter("password");
-        User user = userDAO.selectUser(account);
-        if (password.equals(user.getPassword())){
-            List<Blog> blogs = blogDAO.selectAllBlog();
-            request.setAttribute("listBlog",blogs);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/show_blog.jsp");
+        User user = new User(account,password);
+        boolean check = myBlogDAO.checkUser(user);
+        if (check){
+            List<Blog> blogList = myBlogDAO.selectAllBlog();
+            request.setAttribute("blogList",blogList);
+            request.setAttribute("account",user);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/personal_page.jsp");
             dispatcher.forward(request,response);
-
-        }else {
+        }else{
             RequestDispatcher dispatcher = request.getRequestDispatcher("/login_form.jsp");
             dispatcher.forward(request,response);
         }
-
-
     }
 }

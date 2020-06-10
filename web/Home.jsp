@@ -16,7 +16,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">My Blog</a>
+        <a class="navbar-brand" href="Home.jsp">My Blog</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -42,7 +42,7 @@
 </nav>
 <div class="container">
     <div class="row">
-        <c:forEach var="blog" items="${listblog}">
+        <c:forEach var="blog" items="${blogList}">
         <div class="col-lg-8">
             <h1 class="mt-4"><c:out value="${blog.getName}"/></h1>
             <p class="lead">

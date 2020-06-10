@@ -11,6 +11,9 @@ public class User {
         this.password = password;
     }
 
+    public User(String account, String firstPassword) {
+    }
+
     public int getId() {
         return id;
     }

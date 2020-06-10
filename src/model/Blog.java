@@ -27,6 +27,15 @@ public class Blog {
         this.user_id = user_id;
     }
 
+    public Blog(int id, String name, String contentBlog, Timestamp date, int user_id, List<Comments> commentsList) {
+        this.id = id;
+        this.name = name;
+        this.contentBlog = contentBlog;
+        this.date = date;
+        this.user_id = user_id;
+        this.commentsList = commentsList;
+    }
+
     public List<Comments> getCommentsList() {
         return commentsList;
     }
