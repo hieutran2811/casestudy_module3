@@ -16,7 +16,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">My Blog</a>
+        <a class="navbar-brand" href="Home.jsp">My Blog</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -42,19 +42,19 @@
 </nav>
 <div class="container">
     <div class="row">
-        <c:forEach var="blog" items="${listblog}">
+        <c:forEach var="blog" items="${blogList}">
         <div class="col-lg-8">
-            <h1 class="mt-4"><c:out value="${blog.getName}"/></h1>
+            <h1 class="mt-4"><c:out value="${blog.name}"/></h1>
             <p class="lead">
                 by
-                <c:out value="${blog.getUserName}"/>
+                <c:out value="${blog.user_name}"/>
             </p>
             <hr>
-            <p><c:out value="${blog.getDate}"/></p>
+            <p><c:out value="${blog.date}"/></p>
             <hr>
             <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
             <hr>
-            <c:out value="${blog.getContent}"/>
+            <c:out value="${blog.contentBlog}"/>
 <%--            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>--%>
 
 <%--            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>--%>
@@ -84,13 +84,13 @@
 <%--                    </form>--%>
 <%--                </div>--%>
 <%--            </div>--%>
-            <c:forEach var="comments" items="${blog.getComments}">
+            <c:forEach var="comments" items="${blog.commentsList}">
             <div class="media mb-4">
                 <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                 <div class="media-body">
-                    <h5 class="mt-0"><c:out value="${comments.getUserName}"/></h5>
-                    <h5 class="mt-0"><c:out value="${comments.getDate}"/></h5>
-                    <c:out value="${blog.getContent}"/>
+                    <h5 class="mt-0"><c:out value="${comments.user_name}"/></h5>
+                    <h5 class="mt-0"><c:out value="${comments.date}"/></h5>
+                    <c:out value="${comments.content}"/>
                 </div>
 
 <%--            </div>--%>

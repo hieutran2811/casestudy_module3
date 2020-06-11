@@ -2,6 +2,7 @@ package controller;
 
 import dao.UserDAO;
 import model.User;
+import model.UserDemo;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -72,7 +73,10 @@ public class UserServlet extends HttpServlet {
     private void listUser(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         List<User> listUser = userDAO.selectAllUsers();
-        request.setAttribute("listUser", listUser);
+        User user = new User(12,"fd","grg","fhe");
+        UserDemo userDemo = new UserDemo(listUser,user);
+        request.setAttribute("listUser", userDemo);
+//        request.setAttribute("userDemo", userDemo);
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
         dispatcher.forward(request, response);
     }
@@ -87,6 +91,7 @@ public class UserServlet extends HttpServlet {
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         User existingUser = userDAO.selectUser(id);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/edit.jsp");
         request.setAttribute("user", existingUser);
         dispatcher.forward(request, response);

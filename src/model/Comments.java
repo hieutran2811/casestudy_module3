@@ -17,6 +17,13 @@ public class Comments {
         this.user_name = user_name;
     }
 
+    public Comments(String content, Timestamp date, int blog_id, String user_name) {
+        this.content = content;
+        this.date = date;
+        this.blog_id = blog_id;
+        this.user_name = user_name;
+    }
+
     public int getId() {
         return id;
     }

@@ -11,7 +11,13 @@ public class User {
         this.password = password;
     }
 
-    public User(String account, String firstPassword) {
+    public User(String account, String password) {
+        this.account = account;
+        this.password = password;
+    }
+
+    public User(String account) {
+        this.account = account;
     }
 
     public int getId() {

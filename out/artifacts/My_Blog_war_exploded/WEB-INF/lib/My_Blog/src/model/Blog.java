@@ -1,35 +1,55 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Blog {
     private int id;
     private String name;
     private String contentBlog;
     private Timestamp date;
-    private int user_id;
+    private String user_name;
+    private List<Comments> commentsList;
 
-    public Blog(int id, String name, String contentBlog, Timestamp date, int user_id) {
+
+    public Blog(int id, String name, String contentBlog, Timestamp date, String user_name) {
         this.id = id;
         this.name = name;
         this.contentBlog = contentBlog;
         this.date = date;
-        this.user_id = user_id;
+        this.user_name = user_name;
     }
 
-    public Blog(String name, String contentBlog, Timestamp date, int user_id) {
+    public Blog(String name, String contentBlog, Timestamp date, String user_name) {
         this.name = name;
         this.contentBlog = contentBlog;
         this.date = date;
-        this.user_id = user_id;
+        this.user_name = user_name;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public Blog(int id, String name, String contentBlog, Timestamp date, String user_name, List<Comments> commentsList) {
+        this.id = id;
+        this.name = name;
+        this.contentBlog = contentBlog;
+        this.date = date;
+        this.user_name= user_name;
+        this.commentsList = commentsList;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public List<Comments> getCommentsList() {
+        return commentsList;
+    }
+
+    public void setCommentsList(List<Comments> commentsList) {
+        this.commentsList = commentsList;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
 
     public int getId() {
