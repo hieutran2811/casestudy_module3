@@ -122,15 +122,19 @@ public class MyBlogDAO {
         preparedStatement.executeUpdate();
     }
     public Blog selectBlogById(int blog_id) throws SQLException {
+        Blog blog= null;
         Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BLOG_BY_ID);
         preparedStatement.setInt(1,blog_id);
         ResultSet resultSet = preparedStatement.executeQuery();
-        String name = resultSet.getString("name");
-        Timestamp timestamp = resultSet.getTimestamp("date");
-        String content = resultSet.getString("content");
-        String user_name = resultSet.getString("user_name");
-        return new  Blog(blog_id,name,content,timestamp,user_name);
+        while (resultSet.next()){
+            String name = resultSet.getString("name");
+            Timestamp timestamp = resultSet.getTimestamp("date");
+            String content = resultSet.getString("content");
+            String user_name = resultSet.getString("user_name");
+            blog=new  Blog(blog_id,name,content,timestamp,user_name);
+        }
+        return  blog;
     }
 
     public void updateBlogById(Blog blog) throws SQLException {
@@ -158,15 +162,19 @@ public class MyBlogDAO {
     }
 
     public Comments selectCommentsById(int comments_id) throws SQLException {
+        Comments comments = null;
         Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SELECT_COMMENTS_BY_ID);
         preparedStatement.setInt(1,comments_id);
         ResultSet resultSet = preparedStatement.executeQuery();
-        Timestamp timestamp = resultSet.getTimestamp("date");
-        String content = resultSet.getString("content");
-        String user_name = resultSet.getString("user_name");
-        int blog_id = resultSet.getInt("blog_id");
-        return new Comments(comments_id,content,timestamp,blog_id,user_name);
+        while (resultSet.next()){
+            Timestamp timestamp = resultSet.getTimestamp("date");
+            String content = resultSet.getString("content");
+            String user_name = resultSet.getString("user_name");
+            int blog_id = resultSet.getInt("blog_id");
+            comments = new Comments(comments_id,content,timestamp,blog_id,user_name);
+        }
+        return  comments;
     }
 
     public void updateCommentsById(Comments comments) throws SQLException {
