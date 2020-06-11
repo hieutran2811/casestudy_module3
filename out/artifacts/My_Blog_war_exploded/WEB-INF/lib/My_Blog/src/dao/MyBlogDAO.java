@@ -11,7 +11,7 @@ import java.util.List;
 public class MyBlogDAO {
     private static final String INSERT_USERS_SQL = "INSERT INTO my_blog.user" + " ( account, password) VALUES " +
             " (?, ?);";
-    private static final String SELECT_ALL_USER = "select * from my_blog.user;";
+//    private static final String SELECT_ALL_USER = "select * from my_blog.user;";
     private static final String SELECT_USER_BY_ACCOUNT_AND_PASSWORD = "select * from my_blog.user where account =? and password =?;";
     private static final String SELECT_USER_BY_ACCOUNT = "select * from my_blog.user where account =?;";
 
@@ -20,15 +20,15 @@ public class MyBlogDAO {
 
     private static final String SELECT_BLOG_BY_ID = "select * from my_blog.blog where id =?;";
     private static final String SELECT_COMMENTS_BY_ID = "select * from my_blog.comments where id =?;";
-    private static final String SELECT_ALL_BLOG = "select * from my_blog.blog;";
+    private static final String SELECT_ALL_BLOG = "select * from my_blog.blog order by date DESC ;";
     private static final String DELETE_BLOG_SQL = "delete from my_blog.blog where id = ?;";
     private static final String DELETE_COMMENTS_BY_BLOG_ID_SQL = "delete from my_blog.comments where blog_id = ?;";
     private static final String DELETE_COMMENTS_SQL = "delete from my_blog.comments where id = ?;";
     private static final String UPDATE_BLOG_SQL = "update my_blog.blog set name = ?,content =?,date=?, user_name =? where id = ?;";
     private static final String UPDATE_COMMENTS_SQL = "update my_blog.comments set content =?,date=?,blog_id=? , user_name =? where id = ?;";
-    private static final String SELECT_ALL_COMMENTS_BY_BLOG_ID = "select * from my_blog.comments where blog_id=?;";
+    private static final String SELECT_ALL_COMMENTS_BY_BLOG_ID = "select * from my_blog.comments where blog_id=? order by date ;";
     private static final String INSERT_COMMENTS_SQL = "INSERT INTO my_blog.comments" + " ( content, date,blog_id,user_name) VALUES " +
-            " (?, ?, ?,?);";;
+            " (?, ?, ?,?);";
 
     public MyBlogDAO() {
     }
